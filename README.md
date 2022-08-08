@@ -2,12 +2,36 @@
 
 [![stability-experimental](https://img.shields.io/badge/stability-stable-green.svg)](https://github.com/emersion/stability-badges#stable)
 <b>Latest release build:</b> <a href="https://github.com/griimnak/Minecraft-HardPlus/releases">here</a>
- 
+
 <b>
+Fork of griimnak's HardcorePlus
+<br/>
+Lose hearts when you die, gain hearts when you kill other player's
+</b>
 
-Fork of 
-Once a user has ran out of hearts, they are perma dead.
+<i>Hardcore++ Changelog</i>
+<br/>
+[Aug 8 2022]
 
+Initial Release
+
+Note: DELETE HARDCOREPLUS AND ITS CONFIG!
+
+- Updated to 1.19 API
+- Rewrote command system
+  - Added tab completion
+  - Allows for selectors (i.e. @a) (implements CommandUtils by ZombieStriker)
+- Implemented life stealing (enabled by default)
+- Cosmetic changes
+- Respawning is now randomized within a radius to prevent mob spawn camping
+- Rewrote enable/disable system
+- Disabled hardcore requirement (was unnecessary)
+- Many other changes
+
+
+
+<i>HardcorePlus Changelog</i>
+<br/>
 [Aug 10 2019]
 
 Thanks NotToBlame for helping find the following bugs.
