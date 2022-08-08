@@ -2,7 +2,7 @@
 
 [![stability-experimental](https://img.shields.io/badge/stability-stable-green.svg)](https://github.com/emersion/stability-badges#stable)
 <b>Latest release build:</b> <a href="https://github.com/griimnak/Minecraft-HardPlus/releases">here</a>
-
+ 
 <b>
 
 Fork of 
