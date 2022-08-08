@@ -1,14 +1,11 @@
-<p align="center">
-  <h1>Hardcore++</h1>
-</p>
+<h1 align="center">Hardcore++</h1>
 
 [![stability-experimental](https://img.shields.io/badge/stability-stable-green.svg)](https://github.com/emersion/stability-badges#stable)
 <b>Latest release build:</b> <a href="https://github.com/griimnak/Minecraft-HardPlus/releases">here</a>
 
 <b>
 
-Enhances the vanilla Minecraft hardcore experience.
-
+Fork of 
 Once a user has ran out of hearts, they are perma dead.
 
 [Aug 10 2019]
