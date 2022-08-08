@@ -1,19 +1,28 @@
-<h1 align="center">Hardcore++</h1>
+<h1 align="center">Hardcore++
+
+by arrivals
+</h1>
+
 
 [![stability-experimental](https://img.shields.io/badge/stability-stable-green.svg)](https://github.com/emersion/stability-badges#stable)
 <b>Latest release build:</b> <a href="https://github.com/griimnak/Minecraft-HardPlus/releases">here</a>
 
 <b>
 Fork of griimnak's HardcorePlus
-<br/>
+
 Lose hearts when you die, gain hearts when you kill other player's
 </b>
 
-<i>Hardcore++ Changelog</i>
-<br/>
-[Aug 8 2022]
+View spigot page for more information on usage.
 
-Initial Release
+<br/>
+<br/>
+
+<h3><i>Hardcore++ Changelog</i></h3>
+
+<b>[Aug 8 2022]</b>
+
+Initial Release (2.0.0)
 
 Note: DELETE HARDCOREPLUS AND ITS CONFIG!
 
@@ -30,9 +39,9 @@ Note: DELETE HARDCOREPLUS AND ITS CONFIG!
 
 
 
-<i>HardcorePlus Changelog</i>
-<br/>
-[Aug 10 2019]
+<h3><i>HardcorePlus Changelog</i></h3>
+
+<b>[Aug 10 2019]</b>
 
 Thanks NotToBlame for helping find the following bugs.
 
@@ -44,7 +53,7 @@ NOTE: Delete your old config before using the new version.
 - Custom state management, since disabling the plugin was buggy.
 - Maxhealth is reset on final death, incase an admin wishes to unban the player.
 
-[July 13 2019]
+<b>[July 13 2019]</b>
 
 HardcorePlus 1.0.0 - Major release
 
@@ -68,7 +77,7 @@ Thank you to OnyxianSoul for suggesting the rework of hardcoreCheck() method.
 
 - Removed weakness on respawn/fake death.
 
-[June 14 2019]
+<b>[June 14 2019]</b>
 
 HardcorePlus 0.1.8 corrects some minor annoyances and finally introduces the configuration system.
 
@@ -85,7 +94,7 @@ Thank you to @LucasLogical for finding the following bugs.
 - Config options for all ingame texts
 - Config option for enforcing hardcore mode upon server.
 
-[May 18 2019]
+<b>[May 18 2019]</b>
 
 - increased weakness after death to 3 minutes 30 sec
 - hardcoreplus commands are accessible from server console now
@@ -96,7 +105,7 @@ Thank you to @LucasLogical for finding the following bugs.
 - fixed bug with setmax command allowing use of negative numbers
 - fixed bug with setmax command allowing use of invalid numbers
 
-[May 15 2019]
+<b>[May 15 2019]</b>
 
 - Users can now restore their max hp by killing the ender dragon.
 - Added blood effect on hit
@@ -106,26 +115,9 @@ Thank you to @LucasLogical for finding the following bugs.
 - Enderdragon kill event
 - Started admin commands
 
-[May 13 2019]
+<b>[May 13 2019]</b>
 
 - Changed health lost from 1 to 2 hearts.
 - Changed DeathEvent to EntityDamagedEvent
 - Death is no longer announced.
 - "Dream" effect created.
-
-<details>
-  <summary>View old media</summary>
-
-##### 2nd Youtube Demonstration:
-
-[![Alt text](https://img.youtube.com/vi/z5rxjSrnwJY/0.jpg)](https://www.youtube.com/watch?v=z5rxjSrnwJY)
-
-##### [OLD] Youtube Demonstration:
-
-[![Alt text](https://img.youtube.com/vi/C36bSUXwPZw/0.jpg)](https://www.youtube.com/watch?v=C36bSUXwPZw)
-</details>
-
-##### Youtube Demonstration:
-
-[![Alt text](https://img.youtube.com/vi/DiMFgSwdqvc/0.jpg)](https://www.youtube.com/watch?v=DiMFgSwdqvc)
-
