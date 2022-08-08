@@ -31,6 +31,12 @@ As with the previous plugin, this remake also bears the GNU GENERAL PUBLIC LICEN
 
 public final class HardcorePlus extends JavaPlugin {
 
+    private static HardcorePlus instance;
+
+    public static HardcorePlus getInstance() {
+        return instance;
+    }
+
     @Override
     public void onEnable() {
         init();
@@ -38,18 +44,20 @@ public final class HardcorePlus extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        this.getLogger().info("Goodbye");
+        this.getLogger().info("Hardcore++ has been hard-disabled.");
     }
 
     private void init() {
-        Globals.pluginEnabled = true;
-        this.getLogger().info("Hello Minecraft!");
         new ConfigManager(this).createConfig(); // load conf
         regEvents();
+        Globals.pluginEnabled = true;
 
         // Register commands
         this.getCommand("hardcoreplusplus").setExecutor(new Commands(this));
         this.getCommand("hardcoreplusplus").setTabCompleter(new Commands(this));
+
+
+        this.getLogger().info("Hardcore++ initialized.");
     }
 
     private void regEvents() {

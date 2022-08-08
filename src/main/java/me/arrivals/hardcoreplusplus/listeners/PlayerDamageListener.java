@@ -1,21 +1,16 @@
 package me.arrivals.hardcoreplusplus.listeners;
 
+import me.arrivals.hardcoreplusplus.GetNearestBlock;
 import me.arrivals.hardcoreplusplus.Globals;
 import me.arrivals.hardcoreplusplus.HardcorePlus;
 import me.arrivals.hardcoreplusplus.config.ConfigManager;
-
-import java.util.Calendar;
-import java.util.Date;
-
-import org.bukkit.ChatColor;
-import org.bukkit.Effect;
-import org.bukkit.Material;
-import org.bukkit.Particle;
+import net.md_5.bungee.api.ChatMessageType;
+import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.BanList.Type;
+import org.bukkit.*;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.enchantments.Enchantment;
-import org.bukkit.entity.ExperienceOrb;
-import org.bukkit.entity.Player;
+import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
@@ -24,25 +19,30 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
+import java.util.Calendar;
+import java.util.Collection;
+import java.util.Date;
+import java.util.concurrent.ThreadLocalRandom;
+
+import static org.bukkit.Bukkit.getLogger;
+
 public class PlayerDamageListener implements Listener {
-    private HardcorePlus plugin;
+    private final HardcorePlus plugin;
 
     public PlayerDamageListener(HardcorePlus plugin) {
         this.plugin = plugin;
     }
 
     @EventHandler
-    public void onPlayerDamage(EntityDamageByEntityEvent event) {
+    public void onPlayerDamageUniversal(EntityDamageEvent event) {
 
         // Is plugin enabled?
-        if(Globals.pluginEnabled) {
+        if (Globals.pluginEnabled) {
 
 
-            if (!(event.getEntity() instanceof Player)) {
+            if (!(event.getEntity() instanceof Player damaged)) {
                 return;
             }
-
-            Player damaged = (Player) event.getEntity();
 
             if (damaged.isBlocking()) {
                 return;
@@ -91,51 +91,51 @@ public class PlayerDamageListener implements Listener {
                             case BLOCK_EXPLOSION ->
                                     broadcast(GetConfigString("dmsg_BlockExplosion").replaceAll("%PLAYER%", damaged.getDisplayName()));
                             case CONTACT ->
-                                    broadcast(GetConfigString("dmsg_BlockExplosion").replaceAll("%PLAYER%", damaged.getDisplayName()));
+                                    broadcast(GetConfigString("dmsg_Contact").replaceAll("%PLAYER%", damaged.getDisplayName()));
                             case CRAMMING ->
-                                    broadcast(GetConfigString("dmsg_BlockExplosion").replaceAll("%PLAYER%", damaged.getDisplayName()));
+                                    broadcast(GetConfigString("dmsg_Cramming").replaceAll("%PLAYER%", damaged.getDisplayName()));
                             case DRAGON_BREATH ->
-                                    broadcast(GetConfigString("dmsg_BlockExplosion").replaceAll("%PLAYER%", damaged.getDisplayName()));
+                                    broadcast(GetConfigString("dmsg_DragonBreath").replaceAll("%PLAYER%", damaged.getDisplayName()));
                             case DROWNING ->
-                                    broadcast(GetConfigString("dmsg_BlockExplosion").replaceAll("%PLAYER%", damaged.getDisplayName()));
-                            case ENTITY_EXPLOSION ->
-                                    broadcast(GetConfigString("dmsg_BlockExplosion").replaceAll("%PLAYER%", damaged.getDisplayName()));
-                            case FALL ->
-                                    broadcast(GetConfigString("dmsg_BlockExplosion").replaceAll("%PLAYER%", damaged.getDisplayName()));
-                            case FALLING_BLOCK ->
-                                    broadcast(GetConfigString("dmsg_BlockExplosion").replaceAll("%PLAYER%", damaged.getDisplayName()));
-                            case FIRE ->
-                                    broadcast(GetConfigString("dmsg_BlockExplosion").replaceAll("%PLAYER%", damaged.getDisplayName()));
-                            case FIRE_TICK ->
-                                    broadcast(GetConfigString("dmsg_BlockExplosion").replaceAll("%PLAYER%", damaged.getDisplayName()));
-                            case FLY_INTO_WALL ->
-                                    broadcast(GetConfigString("dmsg_BlockExplosion").replaceAll("%PLAYER%", damaged.getDisplayName()));
-                            case HOT_FLOOR ->
-                                    broadcast(GetConfigString("dmsg_BlockExplosion").replaceAll("%PLAYER%", damaged.getDisplayName()));
-                            case LAVA ->
-                                    broadcast(GetConfigString("dmsg_BlockExplosion").replaceAll("%PLAYER%", damaged.getDisplayName()));
-                            case LIGHTNING ->
-                                    broadcast(GetConfigString("dmsg_BlockExplosion").replaceAll("%PLAYER%", damaged.getDisplayName()));
-                            case MAGIC ->
-                                    broadcast(GetConfigString("dmsg_BlockExplosion").replaceAll("%PLAYER%", damaged.getDisplayName()));
-                            case POISON ->
-                                    broadcast(GetConfigString("dmsg_BlockExplosion").replaceAll("%PLAYER%", damaged.getDisplayName()));
-                            case PROJECTILE ->
-                                    broadcast(GetConfigString("dmsg_BlockExplosion").replaceAll("%PLAYER%", damaged.getDisplayName()));
-                            case STARVATION ->
-                                    broadcast(GetConfigString("dmsg_BlockExplosion").replaceAll("%PLAYER%", damaged.getDisplayName()));
-                            case SUFFOCATION ->
-                                    broadcast(GetConfigString("dmsg_BlockExplosion").replaceAll("%PLAYER%", damaged.getDisplayName()));
-                            case SUICIDE ->
-                                    broadcast(GetConfigString("dmsg_BlockExplosion").replaceAll("%PLAYER%", damaged.getDisplayName()));
-                            case THORNS ->
-                                    broadcast(GetConfigString("dmsg_BlockExplosion").replaceAll("%PLAYER%", damaged.getDisplayName()));
-                            case VOID ->
-                                    broadcast(GetConfigString("dmsg_BlockExplosion").replaceAll("%PLAYER%", damaged.getDisplayName()));
-                            case WITHER ->
-                                    broadcast(GetConfigString("dmsg_BlockExplosion").replaceAll("%PLAYER%", damaged.getDisplayName()));
+                                    broadcast(GetConfigString("dmsg_Drowning").replaceAll("%PLAYER%", damaged.getDisplayName()));
                             case ENTITY_ATTACK ->
-                                    broadcast(GetConfigString("dmsg_BlockExplosion").replaceAll("%PLAYER%", damaged.getDisplayName()));
+                                    broadcast(GetConfigString("dmsg_EntityAttack").replaceAll("%PLAYER%", damaged.getDisplayName()));
+                            case ENTITY_EXPLOSION ->
+                                    broadcast(GetConfigString("dmsg_EntityExplosion").replaceAll("%PLAYER%", damaged.getDisplayName()));
+                            case FALL ->
+                                    broadcast(GetConfigString("dmsg_Fall").replaceAll("%PLAYER%", damaged.getDisplayName()));
+                            case FALLING_BLOCK ->
+                                    broadcast(GetConfigString("dmsg_FallingBlock").replaceAll("%PLAYER%", damaged.getDisplayName()));
+                            case FIRE ->
+                                    broadcast(GetConfigString("dmsg_Fire").replaceAll("%PLAYER%", damaged.getDisplayName()));
+                            case FIRE_TICK ->
+                                    broadcast(GetConfigString("dmsg_FireTick").replaceAll("%PLAYER%", damaged.getDisplayName()));
+                            case FLY_INTO_WALL ->
+                                    broadcast(GetConfigString("dmsg_FlyIntoWall").replaceAll("%PLAYER%", damaged.getDisplayName()));
+                            case HOT_FLOOR ->
+                                    broadcast(GetConfigString("dmsg_HotFloor").replaceAll("%PLAYER%", damaged.getDisplayName()));
+                            case LAVA ->
+                                    broadcast(GetConfigString("dmsg_Lava").replaceAll("%PLAYER%", damaged.getDisplayName()));
+                            case LIGHTNING ->
+                                    broadcast(GetConfigString("dmsg_Lightning").replaceAll("%PLAYER%", damaged.getDisplayName()));
+                            case MAGIC ->
+                                    broadcast(GetConfigString("dmsg_Magic").replaceAll("%PLAYER%", damaged.getDisplayName()));
+                            case POISON ->
+                                    broadcast(GetConfigString("dmsg_Poison").replaceAll("%PLAYER%", damaged.getDisplayName()));
+                            case PROJECTILE ->
+                                    broadcast(GetConfigString("dmsg_Projectile").replaceAll("%PLAYER%", damaged.getDisplayName()));
+                            case STARVATION ->
+                                    broadcast(GetConfigString("dmsg_Starvation").replaceAll("%PLAYER%", damaged.getDisplayName()));
+                            case SUFFOCATION ->
+                                    broadcast(GetConfigString("dmsg_Suffocation").replaceAll("%PLAYER%", damaged.getDisplayName()));
+                            case SUICIDE ->
+                                    broadcast(GetConfigString("dmsg_Suicide").replaceAll("%PLAYER%", damaged.getDisplayName()));
+                            case THORNS ->
+                                    broadcast(GetConfigString("dmsg_Thorns").replaceAll("%PLAYER%", damaged.getDisplayName()));
+                            case VOID ->
+                                    broadcast(GetConfigString("dmsg_Void").replaceAll("%PLAYER%", damaged.getDisplayName()));
+                            case WITHER ->
+                                    broadcast(GetConfigString("dmsg_Wither").replaceAll("%PLAYER%", damaged.getDisplayName()));
 
                             // equivalent to else
                             default ->
@@ -218,7 +218,7 @@ public class PlayerDamageListener implements Listener {
                         int total_xp = damaged.getLevel();
                         if (total_xp > 0) {
                             // drop xp
-                            ((ExperienceOrb) damaged.getWorld().spawn(damaged.getLocation(), ExperienceOrb.class)).setExperience(total_xp);
+                            damaged.getWorld().spawn(damaged.getLocation(), ExperienceOrb.class).setExperience(total_xp);
                         }
                         // reset
                         damaged.setLevel(0);
@@ -232,14 +232,16 @@ public class PlayerDamageListener implements Listener {
                     // degrade max hp if enabled
                     if (ConfigManager.config.getBoolean("LoseMaxHealthOnRespawnEnabled")) {
 
+
                         // give damager hearts
-                        if (ConfigManager.config.getBoolean("StealMaxHealthOnMurder") && event.getDamager() instanceof Player) {
-                            Player damager = (Player) event.getDamager();
-                            double dmgr_max_hp = damager.getAttribute(Attribute.GENERIC_MAX_HEALTH).getBaseValue();
-                            double new_health = dmgr_max_hp + ConfigManager.config.getDouble("LoseMaxHealthOnRespawnAmmount");
-                            plugin.getLogger().info(String.valueOf(new_health));
-                            damager.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(new_health);
-                            damager.sendMessage(ChatColor.GREEN + "" + ConfigManager.config.getString("HealthStealText"));
+                        if (event instanceof EntityDamageByEntityEvent) {
+                            if (ConfigManager.config.getBoolean("StealMaxHealthOnMurder") && ((EntityDamageByEntityEvent) event).getDamager() instanceof Player damager) {
+                                double dmgr_max_hp = damager.getAttribute(Attribute.GENERIC_MAX_HEALTH).getBaseValue();
+                                double new_health = dmgr_max_hp + ConfigManager.config.getDouble("LoseMaxHealthOnRespawnAmmount");
+                                plugin.getLogger().info(String.valueOf(new_health));
+                                damager.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(new_health);
+                                damager.sendMessage(ChatColor.GREEN + "" + ConfigManager.config.getString("HealthStealText"));
+                            }
                         }
 
                         // take damaged hearts
@@ -248,12 +250,9 @@ public class PlayerDamageListener implements Listener {
                         damaged.sendMessage(ChatColor.RED + "" + ConfigManager.config.getString("HealthLossText"));
                         plugin.getLogger().info(damaged.getDisplayName() + " has lost permanent health.");
 
-                    }
-
-                    else {
+                    } else {
                         damaged.setHealth(max_hp);
                     }
-
 
 
                     // re saturate
@@ -267,19 +266,82 @@ public class PlayerDamageListener implements Listener {
                                 damaged.teleport(damaged.getBedSpawnLocation());
                                 // damaged.sendMessage(ChatColor.GRAY + "" + ChatColor.ITALIC + ConfigManager.config.getString("RespawnBedText"));
                             } else {
-                                damaged.teleport(damaged.getServer().getWorlds().get(0).getSpawnLocation());
+
+                                // Randomize world spawn to prevent mobs from camping you
+                                Location sl1 = damaged.getServer().getWorlds().get(0).getSpawnLocation();
+                                int randomNumber = ThreadLocalRandom.current().nextInt(10, 50 + 1);
+                                Location sl2 = sl1.add(randomNumber, 0, randomNumber);
+
+                                // Spawn finding logic. Sea level is around 63, so here I will use 63+y_radius
+                                int y_radius = 15;
+
+                                Location spawnLocation = new Location(sl2.getWorld(), sl2.getX(), 63 + y_radius, sl2.getZ());
+                                Location safe_spawn = GetNearestBlock.ofSafe(spawnLocation, 50, y_radius);
+
+
+                                damaged.teleport(safe_spawn);
                                 // damaged.sendMessage(ChatColor.GRAY + "" + ChatColor.ITALIC + ConfigManager.config.getString("RespawnWildText"));
+                            }
+
+                            // Give invincibility for a short period of time to prevent spawn camping
+                            damaged.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, 60, 1));
+                            damaged.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_FALLING, 60, 1));
+
+                            new Globals.Countdown(3, plugin) {
+                                String load_anim = "";
+
+                                @Override
+                                public void count(int current) {
+                                    damaged.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(ChatColor.YELLOW + "" + ChatColor.UNDERLINE + "Reviving" + load_anim));
+                                    if (current == 3) {
+                                        load_anim = ".";
+                                    } else if (current == 2) {
+                                        load_anim = "..";
+                                    } else if (current == 1) {
+                                        load_anim = "...";
+                                    }
+                                }
+
+                            }.start();
+
+                            // de-aggro mobs around player. if player fake respawns near a mob that is targeting them,
+                            // it will spawn camp and kill instantly without this code
+
+                            // Edit: as of testing this function does not work at all. No indication as to how to achieve without NMS
+
+                            Location location = damaged.getLocation();
+                            Collection<Entity> nearbyEntities = location.getWorld().getNearbyEntities(location, 7, 7, 7);
+                            for (Entity e : nearbyEntities) {
+                                if (e instanceof Mob) {
+
+                                    LivingEntity target = ((Mob) e).getTarget();
+                                    if (target instanceof Player && (target == damaged)) {
+                                        getLogger().info(((Mob) e).getTarget().toString());
+
+
+                                        if (e instanceof Wolf) {
+                                            ((Wolf) e).setAngry(false);
+                                            getLogger().info(String.valueOf(((Wolf) e).isAngry()));
+                                        } else if (e instanceof PigZombie) {
+                                            ((PigZombie) e).setAngry(false);
+                                            getLogger().info(String.valueOf(((PigZombie) e).isAngry()));
+                                        }
+
+                                        ((Mob) e).setTarget(null);
+
+                                    }
+                                }
                             }
                         }
                     }, 5);
 
                     // trippy effects if enabled
                     if (ConfigManager.config.getBoolean("RespawnSoundEnabled")) {
-                        damaged.getWorld().playEffect(damaged.getLocation(), Effect.ZOMBIE_CONVERTED_VILLAGER, 0);
+                        damaged.getWorld().playSound(damaged, Sound.ENTITY_ZOMBIE_VILLAGER_CONVERTED, 2, 1);
                     }
                     if (ConfigManager.config.getBoolean("RespawnEffectEnabled")) {
-                        damaged.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 120, 1));
-                        damaged.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 100, 0));
+                        damaged.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 60, 1));
+                        damaged.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 60, 0));
                     }
 
                     // ban effect if enabled
@@ -305,18 +367,20 @@ public class PlayerDamageListener implements Listener {
         }
     }
 
-    private Date getBanDate(int h)
-    {
+
+    private Date getBanDate(int h) {
         Calendar c = Calendar.getInstance();
         c.setTime(new Date());
         c.add(Calendar.HOUR_OF_DAY, h);
         return c.getTime();
     }
+
     // Sends a message to the whole server
-    private void broadcast(String msg){
+    private void broadcast(String msg) {
         plugin.getServer().broadcastMessage(msg);
     }
-    private String GetConfigString(String configEntry){
+
+    private String GetConfigString(String configEntry) {
         return ConfigManager.config.getString(configEntry);
     }
 }

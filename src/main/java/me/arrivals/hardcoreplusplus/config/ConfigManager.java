@@ -7,14 +7,18 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import java.io.File;
 
 public class ConfigManager {
-    private HardcorePlus plugin;
-
-    private static File cfile;
     public static FileConfiguration config;
+    private static File cfile;
+    private HardcorePlus plugin;
 
     public ConfigManager(HardcorePlus plugin) {
         this.plugin = plugin;
-     }
+    }
+
+    public static void reloadConfig() {
+        // re assign config to current cfile
+        config = YamlConfiguration.loadConfiguration(cfile);
+    }
 
     public void createConfig() {
         config = plugin.getConfig();
@@ -24,10 +28,5 @@ public class ConfigManager {
 
         cfile = new File(plugin.getDataFolder(), "config.yml");
         plugin.getLogger().info("Config loaded.");
-    }
-
-    public static void reloadConfig() {
-         // re assign config to current cfile
-         config = YamlConfiguration.loadConfiguration(cfile);
     }
 }

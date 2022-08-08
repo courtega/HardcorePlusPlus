@@ -1,11 +1,11 @@
 <p align="center">
-  <img src="https://i.imgur.com/ak1ZAlR.png" alt="Hardcore+"/>
+  <h1>Hardcore++</h1>
 </p>
 
 [![stability-experimental](https://img.shields.io/badge/stability-stable-green.svg)](https://github.com/emersion/stability-badges#stable)
 <b>Latest release build:</b> <a href="https://github.com/griimnak/Minecraft-HardPlus/releases">here</a>
 
-<b>A Minecraft 1.14.1+ Bukkit/Spigot/Paper Plugin</b>
+<b>
 
 Enhances the vanilla Minecraft hardcore experience.
 
@@ -38,7 +38,7 @@ Thank you to OnyxianSoul for suggesting the rework of hardcoreCheck() method.
 - Added option to temp ban on respawn/fake death.
 - Added option to permaban on real death/perma death.
 - Added option to announce respawn/fake death to server.
-- Added option to keep inventory respawn/fake death. 
+- Added option to keep inventory respawn/fake death.
 - Added option to keep experience on respawn/fake death.
 
 - Added hardcoreplus.ban_exempt permission to allow players to ignore banondeath
@@ -46,7 +46,6 @@ Thank you to OnyxianSoul for suggesting the rework of hardcoreCheck() method.
 - Added stat tracking, so far only "total-perm-dead-players" is avaiable.
 
 - Removed weakness on respawn/fake death.
-
 
 [June 14 2019]
 
@@ -85,9 +84,9 @@ Thank you to @LucasLogical for finding the following bugs.
 - Added admin permission
 - Enderdragon kill event
 - Started admin commands
-  
+
 [May 13 2019]
- 
+
 - Changed health lost from 1 to 2 hearts.
 - Changed DeathEvent to EntityDamagedEvent
 - Death is no longer announced.
@@ -97,12 +96,15 @@ Thank you to @LucasLogical for finding the following bugs.
   <summary>View old media</summary>
 
 ##### 2nd Youtube Demonstration:
+
 [![Alt text](https://img.youtube.com/vi/z5rxjSrnwJY/0.jpg)](https://www.youtube.com/watch?v=z5rxjSrnwJY)
-  
+
 ##### [OLD] Youtube Demonstration:
+
 [![Alt text](https://img.youtube.com/vi/C36bSUXwPZw/0.jpg)](https://www.youtube.com/watch?v=C36bSUXwPZw)
 </details>
 
 ##### Youtube Demonstration:
+
 [![Alt text](https://img.youtube.com/vi/DiMFgSwdqvc/0.jpg)](https://www.youtube.com/watch?v=DiMFgSwdqvc)
 

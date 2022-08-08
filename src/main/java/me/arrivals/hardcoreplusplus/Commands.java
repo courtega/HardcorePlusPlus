@@ -4,10 +4,14 @@ import me.arrivals.hardcoreplusplus.config.ConfigManager;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.attribute.Attribute;
-import org.bukkit.command.*;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.CommandSender;
+import org.bukkit.command.TabExecutor;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.util.StringUtil;
+
 import java.util.*;
 
 import static org.bukkit.Bukkit.getServer;
@@ -29,8 +33,7 @@ public class Commands implements CommandExecutor, TabExecutor {
 
         if (Objects.equals(givenUser, "@a") || Objects.equals(givenUser, "@p") || Objects.equals(givenUser, "@r") || Objects.equals(givenUser, "@s")) {
             return true;
-        }
-        else {
+        } else {
             return getServer().getPlayer(givenUser) != null;
         }
 
@@ -39,10 +42,10 @@ public class Commands implements CommandExecutor, TabExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
         // Command: hardcoreplusplus
-        if(command.getName().equalsIgnoreCase("hardcoreplusplus")) {
+        if (command.getName().equalsIgnoreCase("hardcoreplusplus")) {
 
             // If no args passed for /hcpp
-            if(args.length < 1) {
+            if (args.length < 1) {
                 sender.sendMessage(ChatColor.GOLD + "" + "Hardcore++ " + plugin.getDescription().getVersion() + " by arrivals");
                 sender.sendMessage(ChatColor.GOLD + "Updated version of griimnak's HardcorePlus");
                 sender.sendMessage("");
@@ -50,11 +53,9 @@ public class Commands implements CommandExecutor, TabExecutor {
                 sender.sendMessage(ChatColor.GRAY + "/hcpp setmax <targets> [<hp>]" + ChatColor.WHITE + " - Sets the max health of a player.");
                 sender.sendMessage(ChatColor.GRAY + "/hcpp disable" + ChatColor.WHITE + " - Disables the plugin.");
                 sender.sendMessage(ChatColor.GRAY + "/hcpp enable" + ChatColor.WHITE + " - Enables the plugin.");
-            }
-
-            else {
-                if(sender.hasPermission("hardcoreplus.admin")){
-                    switch(args[0].toLowerCase()) {
+            } else {
+                if (sender.hasPermission("hardcoreplus.admin")) {
+                    switch (args[0].toLowerCase()) {
 
                         case "reload":
                             ConfigManager.reloadConfig();
@@ -62,7 +63,7 @@ public class Commands implements CommandExecutor, TabExecutor {
                             break;
                         case "setmax":
                             // Wrong amount of args
-                            if(args.length != 3) {
+                            if (args.length != 3) {
                                 commandErrorMsg(sender, label, args);
                                 return true;
                             }
@@ -70,13 +71,12 @@ public class Commands implements CommandExecutor, TabExecutor {
                             // Allows for the usage of target selectors like @p
                             Entity[] givenUsers = CommandUtils.getTargets(sender, args[1]);
 
-                            if(isValidUser(args[1])) {
+                            if (isValidUser(args[1])) {
                                 // @s will always be the sender
-                                if(Objects.equals(args[1], "@s") && sender instanceof Player) {
+                                if (Objects.equals(args[1], "@s") && sender instanceof Player) {
                                     givenUsers = new Entity[1];
                                     givenUsers[0] = (Entity) sender;
-                                }
-                                else if ((Objects.equals(args[1], "@s") && !(sender instanceof Player)) || (Objects.equals(args[1], "@p") && !(sender instanceof Player))) {
+                                } else if ((Objects.equals(args[1], "@s") && !(sender instanceof Player)) || (Objects.equals(args[1], "@p") && !(sender instanceof Player))) {
                                     sender.sendMessage(ChatColor.RED + "Selector '" + args[1] + "' cannot be used by non-living senders.");
                                     return false;
                                 }
@@ -85,13 +85,12 @@ public class Commands implements CommandExecutor, TabExecutor {
 
                                 try {
                                     max_hp = Double.parseDouble(args[2]);
-                                }
-                                catch(NumberFormatException e) {
+                                } catch (NumberFormatException e) {
                                     sender.sendMessage(ChatColor.RED + "Invalid max health value.");
                                     return true;
                                 }
 
-                                if(max_hp < 0.0D || max_hp > 2048.0D) {
+                                if (max_hp < 0.0D || max_hp > 2048.0D) {
                                     sender.sendMessage(ChatColor.RED + "Max health must be between 0 and 2048.");
                                 }
 
@@ -105,12 +104,10 @@ public class Commands implements CommandExecutor, TabExecutor {
                                     sender.sendMessage(ChatColor.GREEN + "Max health has been updated successfully.");
                                 }
 
-                            }
-                            else if (Objects.equals(args[1], "@e")) {
+                            } else if (Objects.equals(args[1], "@e")) {
                                 sender.sendMessage(ChatColor.RED + "Selector '@e' cannot be used (requires type Player).");
-                            }
-                            else {
-                                sender.sendMessage(ChatColor.RED + "User '"+ args[1] +"' not found.");
+                            } else {
+                                sender.sendMessage(ChatColor.RED + "User '" + args[1] + "' not found.");
                             }
 
                             break;
@@ -119,9 +116,8 @@ public class Commands implements CommandExecutor, TabExecutor {
                             if (Globals.pluginEnabled) {
                                 Globals.pluginEnabled = false;
                                 sender.sendMessage(ChatColor.GREEN + "Disabled Hardcore++.");
-                            }
-                            else {
-                                sender.sendMessage(""+ ChatColor.RED+"Plugin is already disabled.");
+                            } else {
+                                sender.sendMessage("" + ChatColor.RED + "Plugin is already disabled.");
                             }
 
                             break;
@@ -130,15 +126,13 @@ public class Commands implements CommandExecutor, TabExecutor {
                             if (!Globals.pluginEnabled) {
                                 Globals.pluginEnabled = true;
                                 sender.sendMessage(ChatColor.GREEN + "Enabled Hardcore++.");
-                            }
-                            else {
-                                sender.sendMessage(""+ ChatColor.RED+"Plugin is already enabled.");
+                            } else {
+                                sender.sendMessage("" + ChatColor.RED + "Plugin is already enabled.");
                             }
 
                             break;
                     }
-                }
-                else {
+                } else {
                     sender.sendMessage("" + ChatColor.DARK_RED + "You don't have the permission to do this.");
                 }
             }
@@ -160,8 +154,7 @@ public class Commands implements CommandExecutor, TabExecutor {
             commands.add("setmax");
             commands.add("disable");
             commands.add("enable");
-        }
-        else if (args.length == 2 && sender.hasPermission("hardcoreplus.admin")) {
+        } else if (args.length == 2 && sender.hasPermission("hardcoreplus.admin")) {
             if (Objects.equals(args[0], "setmax")) {
                 List<Player> playersOnline = new ArrayList<>(Bukkit.getOnlinePlayers());
                 List<String> allowedSelectors = Arrays.asList("@a", "@p", "@s", "@r");
@@ -171,8 +164,7 @@ public class Commands implements CommandExecutor, TabExecutor {
                 }
                 completions.addAll(allowedSelectors);
             }
-        }
-        else if (args.length == 3 && sender.hasPermission("hardcoreplus.admin")) {
+        } else if (args.length == 3 && sender.hasPermission("hardcoreplus.admin")) {
             if (Objects.equals(args[0], "setmax")) {
                 completions.add("20");
             }

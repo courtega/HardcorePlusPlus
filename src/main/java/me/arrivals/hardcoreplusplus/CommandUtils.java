@@ -13,6 +13,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.entity.minecart.CommandMinecart;
 import org.bukkit.scoreboard.Objective;
 import org.bukkit.scoreboard.Team;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;

@@ -7,8 +7,8 @@ KeepExperienceEnabled: false # keep experience?
 
 LoseMaxHealthOnRespawnEnabled: true
 StealMaxHealthOnMurder: true
-LoseMaxHealthOnRespawnAmmount: 4.0 # 2.0 = 1 heart, 1.0 = half a heart
-HealthLossText: "A player stole some of your hearts!"
+LoseMaxHealthOnRespawnAmmount: 2.0 # 2.0 = 1 heart, 1.0 = half a heart
+HealthLossText: "You lost some of your hearts!"
 HealthStealText: "You stole someone's hearts!"
 
 

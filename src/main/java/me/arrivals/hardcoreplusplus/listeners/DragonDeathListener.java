@@ -23,15 +23,17 @@ public class DragonDeathListener implements Listener {
     public void onEnderDragonKill(EntityDeathEvent event) {
 
         // Is plugin enabled?
-        if(Globals.pluginEnabled) {
+        if (Globals.pluginEnabled) {
 
             // if enabled in config
-            if(ConfigManager.config.getBoolean("DragonKillRestoresMaxHealthEnabled")) {
-                if(!(event.getEntity() instanceof EnderDragon)) { return; }
+            if (ConfigManager.config.getBoolean("DragonKillRestoresMaxHealthEnabled")) {
+                if (!(event.getEntity() instanceof EnderDragon)) {
+                    return;
+                }
                 // for players in server
-                for(Player player: plugin.getServer().getOnlinePlayers()) {
+                for (Player player : plugin.getServer().getOnlinePlayers()) {
                     // if present in the end when dragon is killed
-                    if(player.getWorld().getEnvironment().equals(World.Environment.THE_END)) {
+                    if (player.getWorld().getEnvironment().equals(World.Environment.THE_END)) {
                         player.sendMessage(ChatColor.GRAY + "" + ChatColor.ITALIC + ConfigManager.config.getString("DragonKillText"));
                         // restore max health
                         player.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(20.0D);
