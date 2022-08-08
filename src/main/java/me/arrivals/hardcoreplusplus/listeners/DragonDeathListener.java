@@ -35,8 +35,10 @@ public class DragonDeathListener implements Listener {
                     // if present in the end when dragon is killed
                     if (player.getWorld().getEnvironment().equals(World.Environment.THE_END)) {
                         player.sendMessage(ChatColor.GRAY + "" + ChatColor.ITALIC + ConfigManager.config.getString("DragonKillText"));
-                        // restore max health
-                        player.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(20.0D);
+                        // restore health to default if under default
+                        if (player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getBaseValue() <= 20.0D) {
+                            player.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(20.0D);
+                        }
                         player.sendMessage(ChatColor.GREEN + "" + ChatColor.BOLD + ConfigManager.config.getString("MaxHealthRestoreText"));
                     }
                 }
