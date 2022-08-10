@@ -5,8 +5,8 @@ import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
 
 public class Globals {
-    public static boolean pluginEnabled = true;
 
+    public static boolean pluginEnabled = true;
 
     public abstract static class Countdown {
 
@@ -14,15 +14,12 @@ public class Globals {
         protected BukkitTask task;
         private int time;
 
-
         public Countdown(int time, Plugin plugin) {
             this.time = time;
             this.plugin = plugin;
         }
 
-
         public abstract void count(int current);
-
 
         public final void start() {
             task = new BukkitRunnable() {

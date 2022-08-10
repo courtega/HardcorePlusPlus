@@ -18,13 +18,11 @@ public class GetNearestBlock {
 
         World world = origin.getWorld();
 
-
         // How it works:
         // for each co-ordinate, it increases in low-bound until something is found
 
         for (int x = -radius; x < radius; x++) {
             for (int y = -y_radius; y < y_radius; y++) {
-
                 for (int z = -radius; z < radius; z++) {
                     Block block = world.getBlockAt(origin.getBlockX() + x, origin.getBlockY() + y, origin.getBlockZ() + z);
                     if (safeBlocks.contains(block.getType())) {

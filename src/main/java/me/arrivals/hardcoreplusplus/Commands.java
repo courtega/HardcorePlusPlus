@@ -61,6 +61,7 @@ public class Commands implements CommandExecutor, TabExecutor {
                             ConfigManager.reloadConfig();
                             sender.sendMessage(ChatColor.GREEN + "Configuration reloaded.");
                             break;
+
                         case "setmax":
                             // Wrong amount of args
                             if (args.length != 3) {

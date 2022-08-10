@@ -28,16 +28,14 @@ Note: DELETE HARDCOREPLUS AND ITS CONFIG!
 
 - Updated to 1.19 API
 - Rewrote command system
-  - Added tab completion
-  - Allows for selectors (i.e. @a) (implements CommandUtils by ZombieStriker)
+    - Added tab completion
+    - Allows for selectors (i.e. @a) (implements CommandUtils by ZombieStriker)
 - Implemented life stealing (enabled by default)
 - Cosmetic changes
 - Respawning is now randomized within a radius to prevent mob spawn camping
 - Rewrote enable/disable system
 - Disabled hardcore requirement (was unnecessary)
 - Many other changes
-
-
 
 <h3><i>HardcorePlus Changelog</i></h3>
 
