@@ -6,10 +6,10 @@ authors: [ courtega, griimnak ]
 description: Fork of griimnak's HardcorePlus
 website: https://courtega.com
 commands:
-  hardcoreplusplus:
+  hcpp:
     description: Administrative commands for HardcorePlusPlus.
     usage: /<command>
-    aliases: [ hcpp ]
+    # aliases: [ hcpp ]
   permissions:
     hardcoreplusplus.admin:
       description: Admin commands like setting max hp for players, etc.

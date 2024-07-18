@@ -1,72 +1,35 @@
-BloodEffectEnabled: true # create blood when a player is hit
-RespawnSoundEnabled: true # make eerie sound when player respawns/dies
-RespawnEffectEnabled: true # give nausea to player on respawn/death
+msg_dragon_kill: "The dream is over. Your mind clears, the portal opens..." # DragonKillText
+msg_max_health_restore: "Your max health has been restored." # MaxHealthRestoreText
+msg_perma_death: " has perished, never to return." # PermaDeathServerText
+perma_ban_reason: "The last thing you feel is the never-ending darkness as your soul is consumed..." # PermaBanText
+msg_totem_clutch: "A magical force emanates from the totem, sparing you from certain death." # TotemDeathPlayerText
+msg_health_steal: "Harnessing the power of dark magic, you feed your soul at the expense of another's." # HealthStealText
+msg_health_loss: "You may have escaped with your life, but the damage has already been done..." # HealthLossText
+msg_ban_spared: "You are given a new lease on life..." # n/a
+msg_ban_on_death: "The last thing you feel is the never-ending darkness as your soul is consumed..." # BanOnDeathText
+msg_revive_status: "Reviving"
+msg_death_standard: "%PLAYER% confronted their mortality"
+msg_no_perms: "You don't have permission to use this command."
+setmax_player_not_found: "Cannot find the player specified."
+setmax_health_not_valid: "The value specified is not a valid number."
+setmax_out_of_bounds: "The value specified is out of bounds."
+setmax_success: "Max health updated successfully."
+enable_success: "Hardcore++ has been enabled."
+disable_success: "Hardcore++ has been disabled."
+enable_fail: "Hardcore++ is already enabled."
+disable_fail: "Hardcore++ is already disabled."
+msg_arg_length_error: "%d arguments provided for '%s'; expected %d."
 
-KeepInventoryEnabled: false # keep inventory?
-KeepExperienceEnabled: false # keep experience?
-
-LoseMaxHealthOnRespawnEnabled: true
-StealMaxHealthOnMurder: true
-LoseMaxHealthOnRespawnAmmount: 2.0 # 2.0 = 1 heart, 1.0 = half a heart
-HealthLossText: "You lost some of your hearts!"
-HealthStealText: "You stole someone's hearts!"
-
-
-BanOnDeathEnabled: false # ban on respawn/death?
-BanOnDeathHoursAmmount: 12 # hours
-BanOnDeathText: "You Died!"
-
-PermaBanOnFinalDeathEnabled: true # perma ban a player when they run out of max health?
-PermaBanText: "Game over."
-
-AnnounceDeathEnabled: true # announce when someone respawn/dies?
-AnnounceDeathText: "%PLAYER% died." # <player> died.
-
-PermaDeathServerText: " is permanently dead."
-PermaDeathPlayerText: "You are permanently dead."
-
-DragonKillRestoresMaxHealthEnabled: true # restore max health to all players in The End when dragon dies
-DragonKillText: "The dream is over. Your mind clears, the portal opens.."
-MaxHealthRestoreText: "Your max health has been restored."
-
-# If BanOnDeath is enabled there's no reason to config below
-# Without BanOnDeath, these give the immersion that the player woke from a bad dream instead of dying
-# RespawnBedText: "You awake from your dream in confusion."
-# RespawnWildText: "With no place of rest set, you awake from your dream in familiar land."
+dragon_kill_restores_max_health: true # DragonKillRestoresMaxHealthEnabled
+bleeding_effect: true # BloodEffectEnabled
+allow_totems: true # TotemOfUndyingWorks
+max_health_loss_on_death: 2.0 # LoseMaxHealthOnRespawnAmmount
+death_announce: true # AnnounceDeathEnabled
+custom_death_msg: false # CustomDeathMessagesEnabled
+lose_max_health_on_death: true # LoseMaxHealthOnRespawnEnabled
+respawn_effects: true # RespawnSoundEnabled
+ban_on_death: false # BanOnDeathEnabled
+ban_duration: 12 # BanOnDeathHoursAmmount
+perma_ban_on_final_death: true # PermaBanOnFinalDeathEnabled
 
 
-
-# Totem fixed
-TotemOfUndyingWorks: true # Disable or enable the Totem of Undying
-TotemDeathPlayerText: "A magical power saves you from a potential casualty." # Text to display for the user when he/she uses a Totem of Undying
-
-
-# Custom death messages
-CustomDeathMessagesEnabled: true # Enable or disable custom death messages
-
-# < dmsg > stands for Death Message
-
-dmsg_BlockExplosion: "%PLAYER% blew his head off." # block explosions not tnt
-dmsg_Contact: "%PLAYER% touched a sharp edge." # When player is touching a block like cactus
-dmsg_Cramming: "%PLAYER% was ran over by a unknown horde of mobs." # When a player is colliding with too many entities
-dmsg_DragonBreath: "%PLAYER was roasted by the dragon." # Dragon Breathing fire
-dmsg_Drowning: "%PLAYER% didn't reach the surface in time." # When player doesn't have enough oxygen
-dmsg_EntityAttack: "%PLAYER% was killed by another player or mob" # When player is killed by a melee attacked from another mob
-dmsg_EntityExplosion: "%PLAYER% blew his head off." # TNT explosion
-dmsg_Fall: "%PLAYER% experienced gravity." # Fall damage
-dmsg_FallingBlock: "%PLAYER% was hit in the head to hard." # When something like anvils falls on a player
-dmsg_Fire: "%PLAYER% played with fire." # Damage caused by direct exposure to fire
-dmsg_FireTick: "%PLAYER% burnt to death." # Damage caused due to burns caused by fire
-dmsg_FlyIntoWall: "%PLAYER% should look forward next time." # When a player collides in a wall at high speeds
-dmsg_HotFloor: "%PLAYER% forgot the floor is lava." # When player is killed by magma blocks
-dmsg_Lava: "%PLAYER% tried to get steamy." # When player is in lava
-dmsg_Lightning: "Seems like Thor didn't like %PLAYER%" # When player is struck by lightning
-dmsg_Magic: "%PLAYER% died to some epic witchcraft." # Damage potion or a spell
-dmsg_Poison: "%PLAYER% felt bad and faded away." # Poison damage
-dmsg_Projectile: "%PLAYER% was 360 no-scoped." # When player is attacked by a projectile
-dmsg_Starvation: "An empty stomach was the end of %PLAYER%" # When player runs out of food and dies
-dmsg_Suffocation: "%PLAYER% was somehow stuck in a wall." # When player is stuck in a wall
-dmsg_Suicide: "%PLAYER% took the easy way out." # When player is killed using the command "/kill"
-dmsg_Thorns: "When %PLAYER% gets killed by someone's armor. ( •_•)" # The damage dealt by the Thorns enchantment
-dmsg_Void: "%PLAYER% died by nothingness, what a disappointment." # When player dies in the void
-dmsg_Wither: "%PLAYER% withered away." # When player dies to the wither effect
