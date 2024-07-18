@@ -25,7 +25,11 @@ public class DragonDeathListener implements Listener {
 
     @EventHandler
     public void onEnderDragonDeath(final EntityDeathEvent event) {
-        if (config.getBoolean("DragonKillRestoresMaxHealthEnabled")) {
+        if (!HardcorePlusPlus.getActive()) {
+            return;
+        }
+
+        if (config.getBoolean("dragon_kill_restores_max_health")) {
             if (!(event.getEntity() instanceof EnderDragon)) {
                 return;
             }

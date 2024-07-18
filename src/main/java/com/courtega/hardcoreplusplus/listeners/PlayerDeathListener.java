@@ -28,15 +28,25 @@ public class PlayerDeathListener implements Listener {
 
     @EventHandler
     public void onPlayerDeath(final PlayerDeathEvent event) {
+        if (!HardcorePlusPlus.getActive()) {
+            return;
+        }
+
         final Player player = event.getPlayer();
-        event.deathMessage(messenger.getDeathBroadcast(player));
 
         final AttributeInstance maxHealth = player.getAttribute(Attribute.GENERIC_MAX_HEALTH);
         assert maxHealth != null;
         maxHealth.setBaseValue(20.0D);
 
+        if (player.hasPermission("hardcoreplusplus.ban_exempt")) {
+            messenger.sendBanSpared(player);
+            return;
+        }
+
+        event.deathMessage(messenger.getDeathBroadcast(player));
+
         //TODO: updateSTatsFile();
-        if (config.getBoolean("PermaBanOnFinalDeathEnabled")) {
+        if (config.getBoolean("perma_ban_on_final_death")) {
             // 10-tick delay
             scheduler.runTaskLater(plugin, () -> {
                 player.ban(messenger.getNoHealthCapacityBanReason(), (Date) null, "HardcorePlusPlus");

@@ -38,6 +38,10 @@ public class PlayerDamageListener implements Listener {
 
     @EventHandler
     public void onPlayerDamage(final EntityDamageEvent event) {
+        if (!HardcorePlusPlus.getActive()) {
+            return;
+        }
+
         if (!(event.getEntity() instanceof Player victim)) {
             return;
         }
@@ -50,7 +54,7 @@ public class PlayerDamageListener implements Listener {
         final Inventory victimInventory = victim.getInventory();
 
         // Add blood effect, if it's enabled
-        if (config.getBoolean("BloodEffectEnabled")) {
+        if (config.getBoolean("bleeding_effect")) {
             victimWorld.playEffect(victimLocation, Effect.STEP_SOUND, Material.REDSTONE_BLOCK);
         }
 
@@ -62,7 +66,7 @@ public class PlayerDamageListener implements Listener {
         // A "totem fix" of some sort? (Dec 5, 2019 - github.com/AleksanderEvensen)
         final Material mainHandItemType = victim.getInventory().getItemInMainHand().getType();
         final Material offHandItemType = victim.getInventory().getItemInOffHand().getType();
-        if (config.getBoolean("TotemOfUndyingWorks")) {
+        if (config.getBoolean("allow_totems")) {
             if (mainHandItemType == Material.TOTEM_OF_UNDYING || offHandItemType == Material.TOTEM_OF_UNDYING) {
                 victim.spawnParticle(Particle.TOTEM_OF_UNDYING, victimLocation, 1);
                 messenger.sendTotemDeath(victim);
@@ -71,16 +75,21 @@ public class PlayerDamageListener implements Listener {
         }
 
         final double maxHealth = victim.getAttribute(Attribute.GENERIC_MAX_HEALTH).getBaseValue();
-        if (maxHealth - config.getDouble("LoseMaxHealthOnRespawnAmmount") <= 0.0d) {
+        if (maxHealth - config.getDouble("max_health_loss_on_death") <= 0.0d) {
             return;
         }
 
         event.setCancelled(true);
 
         // Custom death announcement
-        if (config.getBoolean("AnnounceDeathEnabled")) {
-            final EntityDamageEvent.DamageCause damageCause = (config.getBoolean("CustomDeathMessagesEnabled")) ? event.getCause() : EntityDamageEvent.DamageCause.VOID;
-            messenger.sendCustomDeath(server, victim, damageCause.toString());
+        if (config.getBoolean("death_announce")) {
+            final String damageCause;
+            if (config.getBoolean("custom_death_msg")) {
+                damageCause = event.getCause().toString();
+            } else {
+                damageCause = "msg_death_standard";
+            }
+            messenger.sendCustomDeath(server, victim, damageCause);
         }
 
         // Drop loot and XP
@@ -106,17 +115,17 @@ public class PlayerDamageListener implements Listener {
         victim.setFireTicks(0);
 
         // Decrease max HP if enabled
-        if (config.getBoolean("LoseMaxHealthOnRespawnEnabled")) {
+        if (config.getBoolean("lose_max_health_on_death")) {
             if (event instanceof EntityDamageByEntityEvent edbeEvent && edbeEvent.getDamager() instanceof Player attacker) {
                 final double attackerMaxHealth = attacker.getAttribute(Attribute.GENERIC_MAX_HEALTH).getBaseValue();
-                final double newAttackerMaxHealth = attackerMaxHealth + config.getDouble("LoseMaxHealthOnRespawnAmmount");
+                final double newAttackerMaxHealth = attackerMaxHealth + config.getDouble("max_health_loss_on_death");
 
                 attacker.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(newAttackerMaxHealth);
                 messenger.sendHealthSteal(attacker);
             }
 
             // Take heart away
-            final double effectiveHealth = maxHealth - config.getDouble("LoseMaxHealthOnRespawnAmmount");
+            final double effectiveHealth = maxHealth - config.getDouble("max_health_loss_on_death");
             victim.setHealth(effectiveHealth);
             victim.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(effectiveHealth);
 
@@ -130,17 +139,17 @@ public class PlayerDamageListener implements Listener {
         victim.setFoodLevel(20);
 
         // Respawning
-        scheduler.runTaskLater(plugin, () -> respawn(victim), 5L);
+        scheduler.runTaskLater(plugin, () -> respawn(victim), 1L);
 
         // Trippy effects
-        if (config.getBoolean("RespawnSoundEnabled")) {
+        if (config.getBoolean("respawn_effects")) {
             victimWorld.playSound(victim, Sound.ENTITY_ZOMBIE_VILLAGER_CONVERTED, 2.0f, 1.0f);
             victim.addPotionEffect(new PotionEffect(PotionEffectType.NAUSEA, 60, 1));
             victim.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 60, 0));
         }
 
         // Banning on death (basically, replicating hardcore mode)
-        if (!config.getBoolean("BanOnDeathEnabled")) {
+        if (!config.getBoolean("ban_on_death")) {
             return;
         }
 
@@ -149,7 +158,7 @@ public class PlayerDamageListener implements Listener {
         } else {
             // If this isn't delayed, it gives a weird "user took too long to log in" error
             scheduler.runTaskLater(plugin, () -> {
-                final int deathBanDuration = config.getInt("BanOnDeathHoursAmmount");
+                final int deathBanDuration = config.getInt("ban_duration");
                 server.getBanList(BanListType.PROFILE).addBan(victim.getPlayerProfile(), messenger.getHardcoreBanReason(), getBanDate(deathBanDuration), "HardcorePlusPlus");
             }, 20L);
         }
