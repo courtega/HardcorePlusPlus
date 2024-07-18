@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RootCommandTabCompleter implements TabCompleter {
-    private final String[] oneCompletions = {"setmax", "getmax", "enable", "disable"};
+    private final String[] oneCompletions = {"setmax", "enable", "disable"};
 
     @Override
     public List<String> onTabComplete(final @NotNull CommandSender sender, final @NotNull Command command, final @NotNull String alias, final String[] args) {
